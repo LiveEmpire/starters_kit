@@ -1,1 +1,0 @@
-# starters_kit
