@@ -1,0 +1,135 @@
+Welcome to getting started with Cucumber!
+First things first: we need to install Cucumber
+This method of getting started requires Bundler to install the Gemfile I included in this directory
+
+1. Run this command: "gem install bundler"
+If successful, you should get this message:
+"Done installing documentation for bundler after 6 seconds
+1 gem installed"
+
+2. Run this command: "bundle install"
+
+Creating your test files
+Gherkin files will go into a ".feature" file which resides in the features folder
+Step Definitions will go into a "step_definitions" folder which resides in your features folder as well
+
+There are two cool to do this:
+1. Run the command "cucucumber --init"
+2. Make the "features" folder and "step_definitions"
+
+If you run "cucumber --init"
+This automatically creates the "features" folder and a "step_definitions" folder we need!
+
+When we do not have a feature file written, running the Cucumber command "cucumber" in the terminal will yield this result:
+0 scenarios
+0 steps
+0m.00s
+
+Its just as it looks! There's nothing run and nothing for the computer to process. 
+I created a file for you that is a kind of template for your first Cucumber test
+Its a ".feature" file with some Gherkin already written out for you
+
+Find some website or project that is suitable to test and find a small feature
+My recommendation: test a link on site
+Write out a simple feature file
+For your first attempt try not to use the keywords "And" or "But"
+Try to use only "Given" "When" "Then"
+My recommendation for the first feature: 
+Most sites have an "About" link that takes us to an about page
+Test to see if clicking an "about" link takes your to an about page
+
+After you've written your .feature file
+Change your directory so that you're "above" the "features" directory
+How to know if you're above the directory? Run the command "ls" on the command line. If you see the "features" directory returned then you're above it.
+
+Run the command "cucumber" and you should see something like this returned:
+
+1 scenario (1 undefined)
+3 steps (3 undefined)
+0m1.747s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Given(/^some state$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I perform some action$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I expect some result to occur$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+
+What's going on here? Gherkin tells the computer that there is one scenario to test and in order to test it we need to give it instructions the computer understands. This means the step is "undefined." How do we define the step to the computer? Regular expressions are used identify the Given, When and Then steps. However what is really cool about Cucumber is that I can copy and paste what the "cucumber" command returned to me into a step definition file using whatever programming language I would like. I'm using Ruby because that's what I know!
+
+So copy and paste this part into a ".rb" file:
+
+Given(/^some state$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I perform some action$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I expect some result to occur$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+
+When I run the command "cucumber" again then I should be returned this:
+
+1 scenario (1 pending)
+3 steps (2 skipped, 1 pending)
+0m0.243s
+
+Whenever I pasted the last regular expressions into my ".rb" file, it had the word "pending" underneath each regular expression. This is recognized by the computer and will return the step as "pending" meaning that it is no longer "undefined." We've defined each step with a regular expression, but we haven't given the computer actual steps to follow yet. However, each line has a "pending" on it, but only one item returns as "pending." This is because Cucumber runs things sequentially. In order for the second step to be run, the first must pass otherwise it will be "skipped." Once we give our step definitions some actual code, we will see our steps either show as "passed" or "failed."
+
+
+For the rest of the tutorial, I'll be showing you Ruby and an extremely cool and intelligent gem called Capybara. It is a webdriver, so that means that it does stuff in the browser based on commands we give it!
+
+Capybara is included in our gemfile! So you already have it installed
+
+Start off your ".rb" file with these two coding snippets above your step definitions:
+
+require 'capybara/cucumber'
+
+Capybara.default_driver = :selenium #Aside: Some of Capybara's methods are rewritten methods of Selenium-Webdriver
+
+So how do we code out our first step? Well if I'm testing to see if a link takes me from point A to point B, then I need to tell my computer to navigate to the starting location
+
+Underneath our Given step, add this command so that it looks like this:
+
+Given(/^some state$/) do
+  visit('enter your website URL here')
+end
+
+
+Yes, Capybara is that smart! It will navigate to the site you entered with Firefox.
+
+If successful you'll see this result:
+
+1 scenario (1 pending)
+3 steps (1 passed, 1 pending, 1 skipped)
+0m0.268s
+
+This means that the first step has passed. The "Given" was successful, so now the computer is ready to process the "When" step. There's no code written for it, but there is a "pending" underneath our "When" step, so the code is still "pending." The last step is skipped because the "Then" step will not run unless the "When" step has code and is "passed."
+
+If not successful (for whatever reason) you'll see this result:
+
+1 scenario (1 failed)
+3 steps (1 failed, 2 skipped)
+0m0.243s
+
+The "Given" is defined with code, but for whatever reason you couldn't run the code. Cucumber will stop the test and show us what failed and why. It can't move on because in order to do so, each step must be defined and pass.
+
+That's all for this tutorial for now. You can finish this test however you'd like! Capybara is awesome for a beginner because it is practically speaking to a computer the way you'd speak with a person. Try to see if you get your entire scenario to pass. You scenario will not pass unless all the steps pass. Try to find some bugs! Its actually really easy to do with Cucumber!
+
+I am a humble beginner, but they say that you come to a better understand of what you teach. Experience tells me that this is true.
+
+If you want help:
+Email: memjay3279@gmail.com
+ScreenHero: Mj128508
