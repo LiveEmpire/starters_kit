@@ -14,7 +14,7 @@ Gherkin files will go into a ".feature" file which resides in the features folde
 Step Definitions will go into a "step_definitions" folder which resides in your features folder as well
 
 There are two cool to do this:
-1. Run the command "cucucumber --init"
+1. Run the command "cucumber --init"
 2. Make the "features" folder and "step_definitions"
 
 If you run "cucumber --init"
